@@ -28,3 +28,11 @@ src/
 - **Backups**: an automatic snapshot is taken daily and before every import, restore or erase (Settings → Data).
 - **PDF export** of monthly reports uses the browser's print dialog ("Save as PDF"), printed in light mode.
 - Keyboard: press `N` anywhere to quick-add.
+
+## Live app & devices
+
+- **Live:** https://preetk0978.github.io/momentum/ (redeploys automatically on every push to `main`)
+- **iPhone:** open the link in Safari → Share → **Add to Home Screen**. It runs full-screen with its own icon and works offline.
+- **Sync (Windows ↔ iPhone):** Settings → *Sync across devices*. Data is stored as `momentum.json` in a **private** repo
+  (`momentum-data`) using a fine-grained token limited to that repo (Contents: read & write). Each device does a
+  three-way merge per record (newest edit wins; deletions propagate). See `src/sync/sync.ts`.
