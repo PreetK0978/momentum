@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme tokens: RGB triplets so Tailwind can apply alpha (bg-accent/10). */
+:root,
+[data-theme='midnight'][data-mode='dark'] {
+  --bg: 8 11 22; --surface: 13 18 34; --elevated: 20 27 48; --line: 33 42 66;
+  --fg: 230 235 245; --muted: 148 160 186; --subtle: 98 110 138;
+  --accent: 79 140 255; --accent2: 139 124 246; --accentfg: 255 255 255;
+  --success: 52 178 123; --warning: 224 160 60; --danger: 229 95 95;
+  --glow: 79 140 255;
+  color-scheme: dark;
+}
+[data-theme='midnight'][data-mode='light'] {
+  --bg: 244 247 252; --surface: 255 255 255; --elevated: 236 241 249; --line: 221 228 240;
+  --fg: 12 20 38; --muted: 71 85 115; --subtle: 130 142 168;
+  --accent: 37 99 235; --accent2: 109 94 252; --accentfg: 255 255 255;
+  --glow: 37 99 235;
+}
+[data-theme='obsidian'][data-mode='dark'] {
+  --bg: 10 10 11; --surface: 18 18 20; --elevated: 26 26 29; --line: 39 39 44;
+  --fg: 237 237 240; --muted: 161 161 170; --subtle: 113 113 122;
+  --accent: 139 124 246; --accent2: 96 165 250; --accentfg: 255 255 255;
+  --glow: 139 124 246;
+}
+[data-theme='obsidian'][data-mode='light'] {
+  --bg: 248 248 249; --surface: 255 255 255; --elevated: 243 243 245; --line: 228 228 231;
+  --fg: 17 17 19; --muted: 82 82 91; --subtle: 140 140 150;
+  --accent: 109 94 252; --accent2: 37 99 235; --accentfg: 255 255 255;
+  --glow: 109 94 252;
+}
+[data-theme='violet'][data-mode='dark'] {
+  --bg: 14 10 22; --surface: 22 17 34; --elevated: 31 24 47; --line: 46 37 66;
+  --fg: 238 234 248; --muted: 167 156 192; --subtle: 116 104 142;
+  --accent: 167 139 250; --accent2: 129 140 248; --accentfg: 20 12 36;
+  --glow: 167 139 250;
+}
+[data-theme='violet'][data-mode='light'] {
+  --bg: 248 246 253; --surface: 255 255 255; --elevated: 241 237 252; --line: 229 222 247;
+  --fg: 26 18 44; --muted: 92 80 120; --subtle: 145 134 170;
+  --accent: 124 92 246; --accent2: 99 102 241; --accentfg: 255 255 255;
+  --glow: 124 92 246;
+}
+[data-theme='minimal'][data-mode='dark'] {
+  --bg: 9 9 9; --surface: 17 17 17; --elevated: 26 26 26; --line: 40 40 40;
+  --fg: 245 245 245; --muted: 163 163 163; --subtle: 115 115 115;
+  --accent: 235 235 235; --accent2: 163 163 163; --accentfg: 10 10 10;
+  --glow: 255 255 255;
+}
+[data-theme='minimal'][data-mode='light'] {
+  --bg: 250 250 250; --surface: 255 255 255; --elevated: 244 244 245; --line: 229 229 229;
+  --fg: 10 10 10; --muted: 82 82 82; --subtle: 140 140 140;
+  --accent: 23 23 23; --accent2: 115 115 115; --accentfg: 255 255 255;
+  --glow: 0 0 0;
+}
+[data-theme='emerald'][data-mode='dark'] {
+  --bg: 7 14 12; --surface: 12 22 19; --elevated: 18 31 27; --line: 30 48 42;
+  --fg: 228 240 235; --muted: 145 168 159; --subtle: 96 120 111;
+  --accent: 52 190 130; --accent2: 94 210 200; --accentfg: 4 20 14;
+  --glow: 52 190 130;
+}
+[data-theme='emerald'][data-mode='light'] {
+  --bg: 245 250 248; --surface: 255 255 255; --elevated: 236 245 241; --line: 218 234 227;
+  --fg: 10 30 22; --muted: 70 100 88; --subtle: 125 150 140;
+  --accent: 16 140 92; --accent2: 13 148 136; --accentfg: 255 255 255;
+  --glow: 16 140 92;
+}
+[data-mode='light'] {
+  --success: 22 150 100; --warning: 196 128 20; --danger: 208 60 60;
+  color-scheme: light;
+}
+[data-mode='dark'] { color-scheme: dark; }
+
+html, body, #root { height: 100%; }
+body {
+  @apply bg-bg text-fg font-sans antialiased;
+  font-feature-settings: 'cv11', 'ss01', 'tnum';
+  background-image:
+    radial-gradient(1200px 600px at 85% -10%, rgb(var(--glow) / 0.07), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgb(var(--accent2) / 0.05), transparent 60%);
+  background-attachment: fixed;
+}
+
+::selection { background: rgb(var(--accent) / 0.3); }
+
+* { scrollbar-width: thin; scrollbar-color: rgb(var(--line)) transparent; }
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 99px; border: 3px solid transparent; background-clip: content-box; }
+
+@layer components {
+  .card { @apply rounded-2xl border border-line bg-surface/80 shadow-card backdrop-blur-sm; }
+  .card-pad { @apply p-5; }
+  .glass { @apply bg-surface/70 backdrop-blur-xl border border-line; }
+  .label { @apply text-[11px] font-medium uppercase tracking-[0.08em] text-subtle; }
+  .num { @apply tabular-nums tracking-tight; }
+  .input {
+    @apply w-full rounded-lg border border-line bg-bg/60 px-3 py-2 text-sm text-fg placeholder:text-subtle
+      outline-none transition focus:border-accent/60 focus:ring-2 focus:ring-accent/20;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-3.5 py-2 text-sm font-medium transition
+      disabled:opacity-50 disabled:pointer-events-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40;
+  }
+  .btn-primary { @apply btn bg-accent text-accentfg hover:brightness-110 shadow-sm; }
+  .btn-ghost { @apply btn text-muted hover:text-fg hover:bg-elevated; }
+  .btn-outline { @apply btn border border-line text-fg hover:bg-elevated; }
+  .btn-danger { @apply btn bg-danger/10 text-danger hover:bg-danger/20; }
+  .icon-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted transition hover:bg-elevated hover:text-fg
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40;
+  }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-md border border-line px-2 py-0.5 text-xs text-muted; }
+  .seg { @apply inline-flex rounded-lg border border-line bg-bg/50 p-0.5; }
+  .seg > button { @apply rounded-md px-2.5 py-1 text-xs font-medium text-muted transition hover:text-fg; }
+  .seg > button[data-active='true'] { @apply bg-elevated text-fg shadow-sm; }
+}
+
+/* Print / PDF export of monthly report */
+@media print {
+  @page { margin: 14mm; }
+  body { background: white !important; color: black; }
+  .no-print { display: none !important; }
+  .print-area { position: absolute; inset: 0; }
+  .card { break-inside: avoid; box-shadow: none !important; backdrop-filter: none !important; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* iPhone: 16px inputs stop Safari zooming in on focus; no grey tap flash */
+@media (max-width: 767px) {
+  .input { font-size: 16px; }
+}
+html { -webkit-tap-highlight-color: transparent; }
